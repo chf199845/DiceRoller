@@ -17,16 +17,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
 
     public void on_button_click (View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        DisplayMessageActivity.this.finish();
 
     }
 
     public void save_click(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        EditText editText2 = (EditText) findViewById(R.id.editText2);
-        String message = editText2.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+       EditText editText2 = (EditText) findViewById(R.id.editText2);
+        Intent resultIntent = new Intent();
+        String result = editText2.getText().toString();
+        MainActivity ma = new MainActivity();
+        ma.question.add(result);
+        setResult(RESULT_OK, resultIntent);
+        finish();
+
+
     }
 }

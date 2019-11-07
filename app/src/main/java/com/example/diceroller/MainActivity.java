@@ -25,7 +25,6 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 public class MainActivity extends AppCompatActivity {
     static int count = 0;
     static int score = 0;
-    boolean check = false;
     public static final String EXTRA_MESSAGE  = "";
     static ArrayList<String> question = new ArrayList<String>();
 
@@ -46,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE);
-        TextView tv = this.findViewById(R.id.textView);
-        question.add(message);
+        question.add("Q1. If you could go anywhere in the world, where would you go?");
+        question.add("Q2. If you were stranded on a desert island, what three things would you want to take with you?");
+        question.add("Q3. If you could eat only one food for the rest of your life, what would that be?");
+        question.add("Q4. If you won a million dollars, what is the first thing you would buy?");
+        question.add("Q5. If you could spaned the day with one fictional character, who would it be?");
+        question.add("Q6. If you found a magic lantern and a genie gave you three wishes, what would you wish?");
 
     }
 
@@ -106,52 +107,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void roll_the_dice (View view) {
         TextView tv = this.findViewById(R.id.textView);
-
-       if(check == false) {
-           question.clear();
-           question.add("Q1. If you could go anywhere in the world, where would you go?");
-           question.add("Q2. If you were stranded on a desert island, what three things would you want to take with you?");
-           question.add("Q3. If you could eat only one food for the rest of your life, what would that be?");
-           question.add("Q4. If you won a million dollars, what is the first thing you would buy?");
-           question.add("Q5. If you could spaned the day with one fictional character, who would it be?");
-           question.add("Q6. If you found a magic lantern and a genie gave you three wishes, what would you wish?");
-           check = true;
-       }
-
         Random r = new Random();
 
-        int num = r.nextInt(question.size()) + 1;
+        int num = r.nextInt(question.size());
 
-        switch(num) {
-            case 1:
-                tv.setText(question.get(0));
-                break;
-            case 2:
-                tv.setText(question.get(1));
-                break;
-            case 3:
-                tv.setText(question.get(2));
-                break;
-            case 4:
-                tv.setText(question.get(3));
-                break;
-            case 5:
-                tv.setText(question.get(4));
-                break;
-            case 6:
-                tv.setText(question.get(5));
-                break;
-             default:
-                 tv.setText("No question");
-                 break;
-
-        }
+        String Q = question.get(num);
+        tv.setText(Q);
 
     }
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
     public void onclick_finish(View view) {
